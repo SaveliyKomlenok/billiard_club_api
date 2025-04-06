@@ -7,8 +7,8 @@ import java.util.List;
 public interface CueService {
     Cue getById(Long id);
     List<Cue> getAll();
-    Cue save(Cue Cue);
-    Cue update(Cue Cue);
+    Cue save(Cue cue);
+    Cue update(Cue cue);
     void delete(Long id);
     String getImagePath(Long id);
 }

@@ -1,5 +1,6 @@
 package com.example.billiardclubapi.entity;
 
+import com.example.billiardclubapi.enumiration.NumberOfPockets;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,18 +41,27 @@ public class BilliardTable {
     private String size;
 
     @Column(nullable = false, length = 64)
-    private String material;
+    private String sizeOfPockets;
+
+    @Column(nullable = false, length = 64)
+    private String frameMaterial;
+
+    @Column(nullable = false, length = 64)
+    private String clothMaterial;
 
     @Column(nullable = false)
     private String clothColor;
 
     @Column(nullable = false)
-    private Integer numberOfPockets;
+    private NumberOfPockets numberOfPockets;
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
     private String imagePath;
+
+    @Column(nullable = false)
+    private boolean isReserved;
 
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")

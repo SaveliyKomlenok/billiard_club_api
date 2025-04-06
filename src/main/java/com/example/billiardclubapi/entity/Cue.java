@@ -37,8 +37,17 @@ public class Cue {
     @Column(nullable = false)
     private Integer amount;
 
+    @Column(nullable = false)
+    private String tipType;
+
+    @Column(nullable = false)
+    private String amountOfParts;
+
     @Column(nullable = false, length = 64)
     private String material;
+
+    @Column(nullable = false)
+    private Integer diameter;
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal weight;
@@ -47,19 +56,10 @@ public class Cue {
     private BigDecimal length;
 
     @Column(nullable = false)
-    private String gripType;
-
-    @Column(nullable = false)
-    private String tipType;
-
-    @Column(nullable = false)
     private String brand;
 
     @Column(nullable = false)
-    private Integer shaftDiameter;
-
-    @Column(nullable = false)
-    private String jointType;
+    private String category;
 
     @Column(columnDefinition = "TEXT")
     private String description;

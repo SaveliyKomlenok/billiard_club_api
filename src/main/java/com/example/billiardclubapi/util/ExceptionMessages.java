@@ -4,20 +4,16 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class ExceptionMessages {
-    public static final String WEAPON_NOT_EXISTS = "Weapon with id %d is not exists";
-    public static final String WEAPON_REVIEW_NOT_EXISTS = "Weapon review with id %d is not exists";
-    public static final String WEAPON_TYPE_NOT_EXISTS = "Weapon type with id %d is not exists";
+    public static final String CUE_NOT_EXISTS = "Cue with id %d is not exists";
+    public static final String CUE_TYPE_NOT_EXISTS = "Cue type with id %d is not exists";
     public static final String MANUFACTURER_NOT_EXISTS = "Manufacturer with id %d is not exists";
-    public static final String ACCESSORY_NOT_EXISTS = "Accessory with id %d is not exists";
-    public static final String ACCESSORY_TYPE_NOT_EXISTS = "Accessory type with id %d is not exists";
-    public static final String ACCESSORY_REVIEW_NOT_EXISTS = "Accessory review with id %d is not exists";
+    public static final String BILLIARD_TABLE_NOT_EXISTS = "Billiard table with id %d is not exists";
+    public static final String BILLIARD_TABLE_TYPE_NOT_EXISTS = "Billiard table type with id %d is not exists";
     public static final String USER_IS_ALREADY_EXISTS = "User with this username %s is already exists";
     public static final String USER_NOT_EXISTS = "User with id %d is not exists";
     public static final String USER_WITH_USERNAME_NOT_EXISTS = "User with username %s is not exists";
-    public static final String WEAPON_REVIEWS_NOT_EXISTS = "Reviews for this weapon with id %d are not exists";
-    public static final String ACCESSORY_REVIEWS_NOT_EXISTS = "Reviews for this accessory with id %d are not exists";
-    public static final String CART_WEAPON_NOT_EXISTS = "Cart weapon with id %d is not exists";
-    public static final String CART_ACCESSORY_NOT_EXISTS = "Cart accessory with id %d is not exists";
-    public static final String AMOUNT_WEAPON_EXCEEDED = "Amount of weapon to purchase has been exceeded";
-    public static final String AMOUNT_ACCESSORY_EXCEEDED = "Amount of accessory to purchase has been exceeded";
+    public static final String SELECTED_CUE_NOT_EXISTS = "Selected cue with id %d is not exists";
+    public static final String SELECTED_TABLE_NOT_EXISTS = "Selected billiard table with id %d is not exists";
+    public static final String AMOUNT_CUE_EXCEEDED = "Amount of cue to reserve has been exceeded";
+    public static final String AMOUNT_BILLIARD_TABLE_EXCEEDED = "Amount of billiard tables to reserve has been exceeded";
 }
