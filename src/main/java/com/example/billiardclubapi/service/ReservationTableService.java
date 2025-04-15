@@ -7,5 +7,5 @@ import java.util.List;
 public interface ReservationTableService {
     List<ReservationTable> getAll(Long reservationId);
     ReservationTable save(ReservationTable reservationTable);
-    void deleteReservationTablesByReservationId(Long reservationId);
+    void returnReservationTablesByReservationId(Long reservationId);
 }

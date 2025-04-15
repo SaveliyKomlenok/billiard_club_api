@@ -1,8 +1,11 @@
 package com.example.billiardclubapi.entity;
 
+import com.example.billiardclubapi.enumiration.ReservationStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,6 +20,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -46,6 +50,13 @@ public class Reservation {
 
     @Column(name = "duration_hours", nullable = false)
     private Integer durationHours;
+
+    @Column(name = "total_price", nullable = false, precision = 32, scale = 2)
+    private BigDecimal totalPrice;
+
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ReservationStatus status;
 
     @OneToMany(mappedBy = "reservation", cascade = CascadeType.REMOVE)
     private List<ReservationCue> reservationCues;

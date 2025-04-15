@@ -25,7 +25,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/carambol/billiard-table-types")
-//@SecurityRequirement(name = "BearerAuth")
+@SecurityRequirement(name = "BearerAuth")
 public class BilliardTableTypeController {
     private final BilliardTableTypeService billiardTableTypeService;
     private final BilliardTableTypeMapper billiardTableTypeMapper;

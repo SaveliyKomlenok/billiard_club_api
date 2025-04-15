@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,16 +19,16 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/carambol/selected")
-//@SecurityRequirement(name = "BearerAuth")
+@SecurityRequirement(name = "BearerAuth")
 public class SelectedController {
     private final SelectedService selectedService;
 
     @GetMapping
     public ResponseEntity<SelectedResponse> listOfSelected(Principal principal) {
-        return new ResponseEntity<>(selectedService.getAll(1L), HttpStatus.OK); // getCurrentUser(principal).getId()
+        return new ResponseEntity<>(selectedService.getAll(getCurrentUser(principal).getId()), HttpStatus.OK);
     }
 
-//    private User getCurrentUser(Principal principal) {
-//        return (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
-//    }
+    private User getCurrentUser(Principal principal) {
+        return (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
+    }
 }

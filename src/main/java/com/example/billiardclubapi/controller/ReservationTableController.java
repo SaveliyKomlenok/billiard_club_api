@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/carambol/reservation-tables")
-//@SecurityRequirement(name = "BearerAuth")
+@SecurityRequirement(name = "BearerAuth")
 public class ReservationTableController {
     private final ReservationTableService reservationTableService;
     private final ReservationTableMapper reservationTableMapper;

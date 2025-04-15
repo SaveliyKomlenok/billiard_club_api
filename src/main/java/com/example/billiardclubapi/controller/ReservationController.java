@@ -12,10 +12,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,30 +28,30 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/carambol/reservations")
-//@SecurityRequirement(name = "BearerAuth")
+@SecurityRequirement(name = "BearerAuth")
 public class ReservationController {
     private final ReservationService reservationService;
     private final ReservationMapper reservationMapper;
 
     @GetMapping
     public ResponseEntity<ReservationListResponse> findAll(Principal principal) {
-        List<Reservation> reservationList = reservationService.getAll(1L); // getCurrentUser(principal).getId()
+        List<Reservation> reservationList = reservationService.getAll(getCurrentUser(principal).getId());
         return new ResponseEntity<>(reservationMapper.toListResponse(reservationList), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<ReservationResponse> create(@RequestBody ReservationRequest request, Principal principal) {
-        Reservation reservation = reservationService.save(reservationMapper.toEntity(request, 1L)); // getCurrentUser(principal).getId())
+        Reservation reservation = reservationService.save(reservationMapper.toEntity(request, getCurrentUser(principal).getId()));
         return new ResponseEntity<>(reservationMapper.toResponse(reservation), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
-        reservationService.delete(id);
-        return ResponseEntity.ok(String.format("Reservation with id %d removed", id));
+    @PutMapping("/{id}")
+    public ResponseEntity<ReservationResponse> cancel(@PathVariable("id") Long id) {
+        Reservation reservation = reservationService.cancel(id);
+        return new ResponseEntity<>(reservationMapper.toResponse(reservation), HttpStatus.OK);
     }
 
-//    private User getCurrentUser(Principal principal) {
-//        return (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
-//    }
+    private User getCurrentUser(Principal principal) {
+        return (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
+    }
 }

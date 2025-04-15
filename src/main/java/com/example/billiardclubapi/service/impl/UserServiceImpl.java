@@ -7,6 +7,7 @@ import com.example.billiardclubapi.exception.UserNotExistsException;
 import com.example.billiardclubapi.repository.UserRepository;
 import com.example.billiardclubapi.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import static com.example.billiardclubapi.util.ExceptionMessages.USER_WITH_USERN
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    //private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public User getById(Long id) {
@@ -56,7 +57,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User changePassword(Long id, UserChangePasswordRequest request) {
         User user = getOrThrow(id);
-        //user.setPassword(passwordEncoder.encode(request.password()));
+        user.setPassword(passwordEncoder.encode(request.password()));
         return userRepository.save(user);
     }
 

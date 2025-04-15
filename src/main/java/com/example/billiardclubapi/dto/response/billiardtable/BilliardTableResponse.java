@@ -5,10 +5,13 @@ import com.example.billiardclubapi.dto.response.manufacturer.ManufacturerRespons
 import com.example.billiardclubapi.enumiration.NumberOfPockets;
 import lombok.Builder;
 
+import java.math.BigDecimal;
+
 @Builder
 public record BilliardTableResponse(
         Long id,
         String name,
+        BigDecimal price,
         Integer amount,
         String size,
         String sizeOfPockets,
@@ -17,7 +20,6 @@ public record BilliardTableResponse(
         String clothColor,
         NumberOfPockets numberOfPockets,
         String description,
-        boolean isReserved,
         ManufacturerResponse manufacturer,
         BilliardTableTypeResponse billiardTableType
 ) {

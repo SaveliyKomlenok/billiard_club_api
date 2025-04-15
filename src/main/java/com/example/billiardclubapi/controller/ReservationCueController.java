@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/carambol/reservation-cues")
-//@SecurityRequirement(name = "BearerAuth")
+@SecurityRequirement(name = "BearerAuth")
 public class ReservationCueController {
     private final ReservationCueService reservationCueService;
     private final ReservationCueMapper reservationCueMapper;

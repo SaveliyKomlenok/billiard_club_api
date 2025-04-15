@@ -34,6 +34,9 @@ public class Cue {
     @Column(nullable = false, length = 128)
     private String name;
 
+    @Column(nullable = false, precision = 32, scale = 2)
+    private BigDecimal price;
+
     @Column(nullable = false)
     private Integer amount;
 
@@ -41,7 +44,7 @@ public class Cue {
     private String tipType;
 
     @Column(nullable = false)
-    private String amountOfParts;
+    private Integer amountOfParts;
 
     @Column(nullable = false, length = 64)
     private String material;
@@ -54,9 +57,6 @@ public class Cue {
 
     @Column(nullable = false)
     private BigDecimal length;
-
-    @Column(nullable = false)
-    private String brand;
 
     @Column(nullable = false)
     private String category;

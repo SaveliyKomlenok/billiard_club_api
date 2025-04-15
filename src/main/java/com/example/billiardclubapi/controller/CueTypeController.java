@@ -25,7 +25,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/carambol/cue-types")
-//@SecurityRequirement(name = "BearerAuth")
+@SecurityRequirement(name = "BearerAuth")
 public class CueTypeController {
     private final CueTypeService cueTypeService;
     private final CueTypeMapper cueTypeMapper;

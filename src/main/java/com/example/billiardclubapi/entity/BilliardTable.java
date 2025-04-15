@@ -17,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -33,6 +34,9 @@ public class BilliardTable {
 
     @Column(nullable = false, length = 128)
     private String name;
+
+    @Column(nullable = false, precision = 32, scale = 2)
+    private BigDecimal price;
 
     @Column(nullable = false)
     private Integer amount;
@@ -59,9 +63,6 @@ public class BilliardTable {
     private String description;
 
     private String imagePath;
-
-    @Column(nullable = false)
-    private boolean isReserved;
 
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")

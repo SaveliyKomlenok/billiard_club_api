@@ -3,6 +3,7 @@ package com.example.billiardclubapi.service.impl;
 import com.example.billiardclubapi.entity.SelectedTable;
 import com.example.billiardclubapi.entity.BilliardTable;
 import com.example.billiardclubapi.exception.AmountOfBilliardTableExceededException;
+import com.example.billiardclubapi.exception.LimitOfCuesExceeded;
 import com.example.billiardclubapi.exception.SelectedTableNotExistsException;
 import com.example.billiardclubapi.repository.SelectedTableRepository;
 import com.example.billiardclubapi.service.SelectedTableService;

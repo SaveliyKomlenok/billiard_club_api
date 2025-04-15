@@ -8,7 +8,6 @@ import lombok.Builder;
 public record ReservationCueResponse(
         Long id,
         Integer amount,
-        CueResponse cue,
-        ReservationResponse reservation
+        CueResponse cue
 ) {
 }

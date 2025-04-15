@@ -1,4 +1,4 @@
-package com.example.billiardclubapi.dto.response;
+package com.example.billiardclubapi.dto.response.auth;
 
 import lombok.Builder;
 

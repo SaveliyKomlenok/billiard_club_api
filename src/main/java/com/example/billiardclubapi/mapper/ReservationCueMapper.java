@@ -15,7 +15,6 @@ import java.util.List;
 public class ReservationCueMapper {
     private final CueService cueService;
     private final CueMapper cueMapper;
-    private final ReservationMapper reservationMapper;
 
     public ReservationCue toEntity(ReservationCueRequest request) {
         return ReservationCue.builder()
@@ -29,7 +28,6 @@ public class ReservationCueMapper {
                 .id(reservationCue.getId())
                 .amount(reservationCue.getAmount())
                 .cue(cueMapper.toResponse(reservationCue.getCue()))
-                .reservation(reservationMapper.toResponse(reservationCue.getReservation()))
                 .build();
     }
 

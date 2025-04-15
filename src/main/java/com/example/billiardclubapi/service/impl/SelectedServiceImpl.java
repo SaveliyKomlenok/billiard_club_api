@@ -8,6 +8,9 @@ import com.example.billiardclubapi.service.SelectedTableService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 @Service
 @RequiredArgsConstructor
 public class SelectedServiceImpl implements SelectedService {

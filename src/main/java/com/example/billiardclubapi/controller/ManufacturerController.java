@@ -25,7 +25,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/carambol/manufacturers")
-//@SecurityRequirement(name = "BearerAuth")
+@SecurityRequirement(name = "BearerAuth")
 public class ManufacturerController {
     private final ManufacturerService manufacturerService;
     private final ManufacturerMapper manufacturerMapper;

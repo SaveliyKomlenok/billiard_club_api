@@ -15,7 +15,6 @@ import java.util.List;
 public class ReservationTableMapper {
     private final BilliardTableService billiardTableService;
     private final BilliardTableMapper billiardTableMapper;
-    private final ReservationMapper reservationMapper;
 
     public ReservationTable toEntity(ReservationTableRequest request) {
         return ReservationTable.builder()
@@ -29,7 +28,6 @@ public class ReservationTableMapper {
                 .id(reservationTable.getId())
                 .amount(reservationTable.getAmount())
                 .billiardTable(billiardTableMapper.toResponse(reservationTable.getBilliardTable()))
-                .reservation(reservationMapper.toResponse(reservationTable.getReservation()))
                 .build();
     }
 

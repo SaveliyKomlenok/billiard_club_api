@@ -9,6 +9,4 @@ import java.util.List;
 @Repository
 public interface ReservationTableRepository extends JpaRepository<ReservationTable, Long> {
     List<ReservationTable> findReservationTablesByReservationId(Long reservationId);
-
-    void deleteReservationTablesByReservationId(Long reservationId);
 }

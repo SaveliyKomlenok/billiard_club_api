@@ -1,5 +1,16 @@
 package com.example.billiardclubapi.exceptionhandler;
 
+import com.example.billiardclubapi.exception.AmountOfBilliardTableExceededException;
+import com.example.billiardclubapi.exception.AmountOfCueExceededException;
+import com.example.billiardclubapi.exception.BilliardTableNotExistsException;
+import com.example.billiardclubapi.exception.CueNotExistsException;
+import com.example.billiardclubapi.exception.CueTypeNotExistsException;
+import com.example.billiardclubapi.exception.LimitOfCuesExceeded;
+import com.example.billiardclubapi.exception.ManufacturerNotExistsException;
+import com.example.billiardclubapi.exception.ReserveNotExistException;
+import com.example.billiardclubapi.exception.SelectedCueNotExistsException;
+import com.example.billiardclubapi.exception.SelectedTableNotExistsException;
+import com.example.billiardclubapi.exception.UserNotExistsException;
 import org.springdoc.api.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +25,17 @@ import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class ExceptionHandlerControllerAdvice {
-    @ExceptionHandler({})
+    @ExceptionHandler({AmountOfBilliardTableExceededException.class,
+            AmountOfCueExceededException.class,
+            BilliardTableNotExistsException.class,
+            CueNotExistsException.class,
+            CueTypeNotExistsException.class,
+            ManufacturerNotExistsException.class,
+            ReserveNotExistException.class,
+            SelectedCueNotExistsException.class,
+            SelectedTableNotExistsException.class,
+            UserNotExistsException.class,
+            LimitOfCuesExceeded.class})
     public ResponseEntity<ErrorMessage> handleBadRequestErrors(RuntimeException exception) {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)

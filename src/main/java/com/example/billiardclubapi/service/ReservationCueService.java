@@ -7,5 +7,5 @@ import java.util.List;
 public interface ReservationCueService {
     List<ReservationCue> getAll(Long reservationId);
     ReservationCue save(ReservationCue reservationCue);
-    void deleteReservationCuesByReservationId(Long reservationId);
+    void returnReservationCuesByReservationId(Long reservationId);
 }

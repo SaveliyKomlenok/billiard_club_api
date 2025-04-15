@@ -16,4 +16,6 @@ public class ExceptionMessages {
     public static final String SELECTED_TABLE_NOT_EXISTS = "Selected billiard table with id %d is not exists";
     public static final String AMOUNT_CUE_EXCEEDED = "Amount of cue to reserve has been exceeded";
     public static final String AMOUNT_BILLIARD_TABLE_EXCEEDED = "Amount of billiard tables to reserve has been exceeded";
+    public static final String RESERVE_NOT_EXISTS = "Reserve with id %d is not exists";
+    public static final String LIMIT_OF_CUES_EXCEEDED = "The limit of cues for reserved has been exceeded, your limit: %d";
 }

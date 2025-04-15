@@ -8,7 +8,6 @@ import lombok.Builder;
 public record ReservationTableResponse(
         Long id,
         Integer amount,
-        BilliardTableResponse billiardTable,
-        ReservationResponse reservation
+        BilliardTableResponse billiardTable
 ) {
 }

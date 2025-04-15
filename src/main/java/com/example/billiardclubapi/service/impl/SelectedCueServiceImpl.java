@@ -2,10 +2,12 @@ package com.example.billiardclubapi.service.impl;
 
 import com.example.billiardclubapi.entity.SelectedCue;
 import com.example.billiardclubapi.entity.Cue;
+import com.example.billiardclubapi.exception.LimitOfCuesExceeded;
 import com.example.billiardclubapi.exception.SelectedCueNotExistsException;
 import com.example.billiardclubapi.exception.AmountOfCueExceededException;
 import com.example.billiardclubapi.repository.SelectedCueRepository;
 import com.example.billiardclubapi.service.SelectedCueService;
+import com.example.billiardclubapi.service.SelectedTableService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,12 +16,14 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.example.billiardclubapi.util.ExceptionMessages.AMOUNT_CUE_EXCEEDED;
+import static com.example.billiardclubapi.util.ExceptionMessages.LIMIT_OF_CUES_EXCEEDED;
 import static com.example.billiardclubapi.util.ExceptionMessages.SELECTED_CUE_NOT_EXISTS;
 
 @Service
 @RequiredArgsConstructor
 public class SelectedCueServiceImpl implements SelectedCueService {
     private final SelectedCueRepository selectedCueRepository;
+    private final SelectedTableService selectedTableService;
 
     @Override
     public SelectedCue getById(Long id) {
@@ -34,6 +38,8 @@ public class SelectedCueServiceImpl implements SelectedCueService {
     @Transactional
     @Override
     public SelectedCue save(SelectedCue selectedCue) {
+        checkLimit(selectedCue.getUser().getId());
+
         Optional<SelectedCue> existingCue = selectedCueRepository.findSelectedCueByCueIdAndUserId(selectedCue.getCue().getId(), selectedCue.getUser().getId());
 
         if (existingCue.isPresent()) {
@@ -51,11 +57,23 @@ public class SelectedCueServiceImpl implements SelectedCueService {
     @Transactional
     @Override
     public SelectedCue update(SelectedCue selectedCue) {
+        checkLimit(selectedCue.getUser().getId());
         getOrThrow(selectedCue.getId());
         if (isEnoughAmount(selectedCue.getCue(), selectedCue)) {
             throw new AmountOfCueExceededException(AMOUNT_CUE_EXCEEDED);
         }
         return selectedCueRepository.save(selectedCue);
+    }
+
+    private void checkLimit(Long userId) {
+        int amountOfSelectedTables = selectedTableService.getAll(userId).size();
+        int amountOfSelectedCues = getAll(userId).stream()
+                .map(SelectedCue::getAmount)
+                .reduce(0, Integer::sum);
+
+        if (amountOfSelectedCues == amountOfSelectedTables * 2) {
+            throw new LimitOfCuesExceeded(String.format(LIMIT_OF_CUES_EXCEEDED, amountOfSelectedTables * 2));
+        }
     }
 
     @Transactional
