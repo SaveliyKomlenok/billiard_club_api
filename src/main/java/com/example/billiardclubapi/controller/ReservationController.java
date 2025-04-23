@@ -39,6 +39,12 @@ public class ReservationController {
         return new ResponseEntity<>(reservationMapper.toListResponse(reservationList), HttpStatus.OK);
     }
 
+    @GetMapping("/active")
+    public ResponseEntity<ReservationListResponse> findAllActiveReservations(Principal principal) {
+        List<Reservation> reservationList = reservationService.getAllActiveReservations(getCurrentUser(principal).getId());
+        return new ResponseEntity<>(reservationMapper.toListResponse(reservationList), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<ReservationResponse> create(@RequestBody ReservationRequest request, Principal principal) {
         Reservation reservation = reservationService.save(reservationMapper.toEntity(request, getCurrentUser(principal).getId()));

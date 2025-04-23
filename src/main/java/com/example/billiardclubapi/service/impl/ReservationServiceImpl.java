@@ -38,7 +38,17 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public List<Reservation> getAll(Long userId) {
-        return reservationRepository.findReservationsByUserId(userId);
+        return reservationRepository.findReservationsByUserId(userId).stream()
+                .filter(reservation -> reservation.getStatus().equals(ReservationStatus.COMPLETED)
+                                       || reservation.getStatus().equals(ReservationStatus.CANCELED))
+                .toList();
+    }
+
+    @Override
+    public List<Reservation> getAllActiveReservations(Long userId) {
+        return reservationRepository.findReservationsByUserId(userId).stream()
+                .filter(reservation -> reservation.getStatus().equals(ReservationStatus.CREATED))
+                .toList();
     }
 
     @Transactional

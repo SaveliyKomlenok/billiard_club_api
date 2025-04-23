@@ -2,6 +2,7 @@ package com.example.billiardclubapi.service.impl;
 
 import com.example.billiardclubapi.entity.SelectedCue;
 import com.example.billiardclubapi.entity.Cue;
+import com.example.billiardclubapi.entity.SelectedTable;
 import com.example.billiardclubapi.exception.LimitOfCuesExceeded;
 import com.example.billiardclubapi.exception.SelectedCueNotExistsException;
 import com.example.billiardclubapi.exception.AmountOfCueExceededException;
@@ -38,7 +39,7 @@ public class SelectedCueServiceImpl implements SelectedCueService {
     @Transactional
     @Override
     public SelectedCue save(SelectedCue selectedCue) {
-        checkLimit(selectedCue.getUser().getId());
+        checkLimit(selectedCue.getUser().getId(), selectedCue);
 
         Optional<SelectedCue> existingCue = selectedCueRepository.findSelectedCueByCueIdAndUserId(selectedCue.getCue().getId(), selectedCue.getUser().getId());
 
@@ -57,7 +58,7 @@ public class SelectedCueServiceImpl implements SelectedCueService {
     @Transactional
     @Override
     public SelectedCue update(SelectedCue selectedCue) {
-        checkLimit(selectedCue.getUser().getId());
+        //checkLimit(selectedCue.getUser().getId(), selectedCue);
         getOrThrow(selectedCue.getId());
         if (isEnoughAmount(selectedCue.getCue(), selectedCue)) {
             throw new AmountOfCueExceededException(AMOUNT_CUE_EXCEEDED);
@@ -65,13 +66,15 @@ public class SelectedCueServiceImpl implements SelectedCueService {
         return selectedCueRepository.save(selectedCue);
     }
 
-    private void checkLimit(Long userId) {
-        int amountOfSelectedTables = selectedTableService.getAll(userId).size();
+    private void checkLimit(Long userId, SelectedCue selectedCue) {
+        int amountOfSelectedTables = selectedTableService.getAll(userId).stream()
+                .map(SelectedTable::getAmount)
+                .reduce(0, Integer::sum);
         int amountOfSelectedCues = getAll(userId).stream()
                 .map(SelectedCue::getAmount)
                 .reduce(0, Integer::sum);
 
-        if (amountOfSelectedCues == amountOfSelectedTables * 2) {
+        if (amountOfSelectedCues >= amountOfSelectedTables * 2) {
             throw new LimitOfCuesExceeded(String.format(LIMIT_OF_CUES_EXCEEDED, amountOfSelectedTables * 2));
         }
     }
